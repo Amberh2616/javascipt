@@ -1,30 +1,27 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>JavaScript &amp; jQuery - Chapter 6: Events - Form Events</title>
-    <link rel="stylesheet" href="css/c06.css" />
-  </head>
-  <body>
-    <div id="page">
-      <h1>List King</h1>
-      <form method="post" action="http://www.example.org/register" id="formSignup">
-        <h2>Membership</h2>
+let formElement = document.getElementById('formSignup')
+let packageElement = document.getElementById('package')
+let packageHintElement = document.getElementById('packageHint')
+let termsElement = document.getElementById('terms')
+let termsHintElement = document.getElementById('termsHint')
 
-        <label for="package" class="selectbox"> Select a package: </label>
-        <select id="package">
-          <option value="annual">1 year ($50)</option>
-          <option value="monthly">1 month ($5)</option>
-        </select>
-        <div id="packageHint" class="tip"></div>
 
-        <input type="checkbox" id="terms" />
-        <label for="terms" class="checkbox"> Check to agree to terms &amp; conditions</label>
-        <div id="termsHint" class="warning"></div>
+formElement.addEventListener('submit', (event) => {
+    console.log('submitting')
+    event.preventDefault()
+})
 
-        <input type="submit" value="next" />
-
-        </form>
-      </div>
-      <script src="js/form.js"></script>
-    </body>
-</html>
+packageElement.addEventListener('change', (event) => {
+    console.log('changing')
+    /*
+    for(const option of packageElement.options){
+        console.log(option.label)
+        console.log(option.value)
+    }*/
+    let selectedIndex = packageElement.selectedIndex
+    if(packageElement.options[selectedIndex].value=='monthly'){
+        packageHintElement.innerText = '如果選擇1年,可以省10元美金'
+    }else{
+        packageHintElement.innerText = '正確的選擇'
+    }
+}
+)
